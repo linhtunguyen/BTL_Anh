@@ -116,7 +116,7 @@ public class Users implements java.io.Serializable {
 		this.passwords = passwords;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
 	public Set<Albums> getAlbumses() {
 		return this.albumses;
 	}
@@ -134,7 +134,7 @@ public class Users implements java.io.Serializable {
 		this.shareds = shareds;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "users")
 	public Set<Images> getImageses() {
 		return this.imageses;
 	}

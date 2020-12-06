@@ -50,6 +50,61 @@ public class helloController {
 
 		return "index";
 	}
+	
+//	
+//	@RequestMapping("/hello")
+//	public String ListImage(ModelMap model) {
+//		List<Images> sanPhams = null;
+//		Session session = factory.openSession();
+//
+//		try {
+//			Query q = session.createQuery("from Images where UserID=:maGH");
+//			q.setParameter("maGH", 1);
+//			sanPhams = (List<Images>) q.list();
+////			sanPhams = q.list();
+////			 model.addAttribute("sanPhams", sanPhams);
+//		} catch (Exception e) {
+//			System.out.println(e);
+//
+//		} finally {
+//			session.close();
+//		}
+//
+//		
+//
+//		return "imageIndex";
+//	}
+	
+//	@RequestMapping("/hello1")
+//	public String GioHang(ModelMap model) {
+//		List<Images> sanPhams = null;
+//		Session session = factory.openSession();
+//
+//		try {
+//			Query q = session.createQuery("from Images where UserID= :maGH");
+//			q.setParameter("maGH", 1);
+//			sanPhams = (List<Images>) q.list();
+////			sanPhams = q.list();
+//			 model.addAttribute("sanPhams", sanPhams);
+//		} catch (Exception e) {
+//			System.out.println(e);
+//
+//		} finally {
+//			session.close();
+//		}
+//
+//		
+//		
+//		
+//		return "imageIndex";
+//	}
+//	
+	
+	
+	
+	
+
+	
 
 	
 	
