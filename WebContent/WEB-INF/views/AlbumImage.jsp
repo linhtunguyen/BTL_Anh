@@ -5,179 +5,217 @@
 <html>
 <head>
 <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
-    <link rel="icon" type="image/png" href="img/favicon.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<link rel="apple-touch-icon" sizes="76x76"
+	href="img/apple-icon.png">
+<link rel="icon" type="image/png"
+	href="img/favicon.png">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<base href="${pageContext.request.contextPath}/">
+<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
+	name='viewport' />
+<!--     Fonts and icons     -->
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<!-- CSS Files -->
+<link href="css/material-dashboard.css?v=2.1.2"
+	rel="stylesheet" />
+<!-- CSS Just for demo purpose, don't include it in your project -->
+<link href="demo/demo.css" rel="stylesheet" />
 
-    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <!-- CSS Files -->
-    <link href="css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="demo/demo.css" rel="stylesheet" />
 </head>
 <body>
+	
+	
+	<h1>Ten User: ${User.userName }</h1>
+
+	<c:forEach items="${ Images}" var="item">
+		<p>${ item.imageId}</p>
+	</c:forEach>
 
 
 
 
+	<div class="wrapper ">
+		<div class="sidebar" data-color="purple" data-background-color="white"
+			data-image="img/sidebar-1.jpg">
+			<div class="logo">
+				<a class="simple-text logo-normal"> Lưu trữ Ảnh </a>
+			</div>
+			<div class="sidebar-wrapper">
+				<ul class="nav">
+					<li class="nav-item "><a class="nav-link" href="/Home/Index">
+							<i class="material-icons">image</i>
+							<p>Ảnh</p>
+					</a></li>
+					<li class="nav-item "><a class="nav-link" href="/Home/Album">
+							<i class="material-icons">folder</i>
+							<p>Album</p>
+					</a></li>
+					<li class="nav-item "><a class="nav-link" href="/Home/Share">
+							<i class="material-icons">share</i>
+							<p>Được chia sẻ</p>
+					</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="main-panel">
+			<!-- Navbar -->
+			<nav
+				class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
+				<div class="container-fluid">
+					<div class="collapse navbar-collapse justify-content-end">
+						<ul class="navbar-nav">
+							<li class="nav-item"><a class="nav-link" href="javascript:;"
+								style="display: flex"> <i class="material-icons">backup</i>
+									<p style="display: block">Tải lên</p>
+							</a></li>
+							<li class="nav-item"><a class="nav-link" data-toggle="modal"
+								data-target="#myModal" style="display: flex"> <i
+									class="material-icons">note_add</i>
+									<p style="display: block">Tạo Album mới</p>
+							</a></li>
+							<li class="nav-item dropdown"><a class="nav-link"
+								href="/User/Logout" style="display: flex" aria-haspopup="true"
+								aria-expanded="false"> <i class="material-icons">person</i>
+									<p style="display: block">Đăng xuất</p>
+							</a>
+								<div class="dropdown-menu dropdown-menu-right"
+									aria-labelledby="navbarDropdownProfile">
+									<a class="dropdown-item" href="#">Thông tin</a> <a
+										class="dropdown-item" href="#">Cài đặt</a>
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="#">Đăng xuất</a>
+								</div></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<div id="myModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Tạo Album Mới</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+							<form action="/Home/ThemAlbum/" method="post">
+								<div class="form-group row">
+									<label class=" col-form-label">Tên Album</label> <input
+										type="text" class="form-control" name="AlbumName" />
+								</div>
+								<div class="form-group row">
+									<label class=" col-form-label">Mô tả</label> <input type="text"
+										class="form-control" name="AlbumCaption" />
+								</div>
 
-    <div class="wrapper ">
-        <div class="sidebar" data-color="purple" data-background-color="white" data-image="~/Content/assets/img/sidebar-1.jpg">
-            <div class="logo">
-                <a class="simple-text logo-normal">
-                    Lưu trữ Ảnh
-                </a>
-            </div>
-            <div class="sidebar-wrapper">
-                <ul class="nav">
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/Home/Index">
-                            <i class="material-icons">image</i>
-                            <p>Ảnh</p>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/Home/Album">
-                            <i class="material-icons">folder</i>
-                            <p>Album</p>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="/Home/Share">
-                            <i class="material-icons">share</i>
-                            <p>Được chia sẻ</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="main-panel">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-                <div class="container-fluid">
-                    <div class="collapse navbar-collapse justify-content-end">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="javascript:;" style="display:flex">
-                                    <i class="material-icons">backup</i>
-                                    <p style="display:block">Tải lên</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="modal"
-                                   data-target="#myModal" style="display:flex">
-                                    <i class="material-icons">note_add</i>
-                                    <p style="display:block">Tạo Album mới</p>
-                                </a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href="/User/Logout" style="display:flex" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons">person</i>
-                                    <p style="display:block">Đăng xuất</p>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                    <a class="dropdown-item" href="#">Thông tin</a>
-                                    <a class="dropdown-item" href="#">Cài đặt</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Đăng xuất</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <div id="myModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Tạo Album Mới</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/Home/ThemAlbum/" method="post">
-                                <div class="form-group row">
-                                    <label class=" col-form-label">Tên Album</label>
-                                    <input type="text" class="form-control" name="AlbumName" />
-                                </div>
-                                <div class="form-group row">
-                                    <label class=" col-form-label">Mô tả</label>
-                                    <input type="text" class="form-control" name="AlbumCaption" />
-                                </div>
-
-                                <button type="submit" style="float:left" class="btn btn-default">Thêm</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-<div class="container-fluid">
-    <form class="navbar-form navbar-right" action="/Home/SearchAlbum" method="post" style="position:relative; top:50px">
-        <div class="form-group bmd-form-group">
-            <input type="text" class="form-control" name="search" placeholder="Tìm kiếm ..." style="position:relative; border-top:1px solid gray; width:301px"><br>
-        </div>
-        <button type="submit" class="btn btn-default" style="position:relative; top:-75px; left:300px;height:35px">
-            <img src="/Content/images/icon-tim-kiem.png" width="18" height="16">
-
-        </button>
-
-    </form>
-
-    <div class="row" style="width:100%">
-       <c:forEach items="${ Albums}" var="item">
-        
-            <div class="col-md-3" style="margin:10px 0;">
-                <img src="/Images/${User.userId}/1" style="width:100%; height:200px" />
-
-                <p style="text-align:center">
-                    <a class="btn btn-primary" href="/Home/DetailAlbum/@it.AlbumID">
-                    ${ item.albumName}
-                      
-                    </a>
-                </p>
-                <a class="btn center-block" style="margin:auto" href="/Home/DeleteAlbum/?AlbumID=@it.AlbumID">Xóa</a>
-
-                <a class="btn  center-block" style="margin:auto" data-toggle="modal" data-book-id=@it.AlbumID id="BtnChiaSe" onclick="OnClickBtnChiaSe($(this).attr('data-book-id'))"
-                   data-target="#modalShare">Chia Sẻ </a>
-            </div>
-            <div id="modalShare" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Chia sẻ với</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/Home/ShareAlbum/" method="post">
-                                <div class="form-group row">
-                                    <input type="text" class="form-control" name="AlbumID" id="AlbumID"  hidden />
-                                    <label class=" col-form-label">Email người nhận</label>
-                                    <input type="text" class="form-control" name="UserEmail" />
-                                </div>
-
-                                <button type="submit" style="float:left" class="btn btn-default" id="BtnShare" >Thêm</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-           
-      </c:forEach>
-
-    </div>
-    
-</div>
- </div>
-    </div>
+								<button type="submit" style="float: left"
+									class="btn btn-default">Thêm</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 
 
+			<div class="container-fluid">
 
-    <!--   Core JS Files   -->
-    <script src="js/bootstrap.min.js"></script>
+				<div>
+					<h2>${Album.albumName }</h2>
+					<h4>${Album.albumCaption}</h4>
+					<div>
+
+						<input type="text" name=" typeForm" value="@album.AlbumID" hidden />
+						<span>Chọn file</span> <input type="file" name="ImageFiles"
+							multiple />
+						<hr />
+						<input type="submit" value="Thêm mới" /> <br />
+
+					</div>
+
+					<form class="navbar-form navbar-right" action="/Home/SearchImage"
+						method="post"
+						style="position: relative; right: -700px; top: -30px">
+						<div class="form-group bmd-form-group">
+							<div class="form-group bmd-form-group">
+
+								<span style="display: inline"> From : </span><input type="date"
+									name="tungay" class="form-control" value="01/01/1000"
+									style="position: relative; width: 120px; display: inline"><span></span>
+								<span>To :</span><input type="date" name="denngay"
+									class="form-control" value="01/01/10000"
+									style="position: relative; display: inline; gray; width: 120px">
+
+								<button type="submit" class="btn btn-default"
+									style="position: relative; left: 0px; height: 35px;">
+									<img src="/Content/images/icon-tim-kiem.png" width="18"
+										height="16">
+								</button>
+							</div>
+						</div>
+					</form>
+
+					<div class="row">
+						<c:forEach items="${ Images}" var="item">
+
+							<div class="col-md-3" style="margin: 10px 0; text-align: center">
+								<img src="Images/${Album.albumId}/${item.imageUrl}"
+									style="width: 100%;" />
+								<div style="text-align: center; font-weight: 500">${ item.imagedate}</div>
+								<a class="btn btn-primary center-block" style="margin: auto"
+									href="/Home/Delete/?ImageID=@it.ImageID">Xóa</a> <a
+									class="btn  center-block" style="margin: auto"
+									data-toggle="modal" data-book-id=@it.ImageID id="BtnChiaSe"
+									onclick="OnClickBtnChiaSe($(this).attr('data-book-id'))"
+									data-target="#modalShare">Chia Sẻ</a>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
+				<div id="modalShare" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<h4 class="modal-title">Chia sẻ với</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+							<div class="modal-body">
+								<form action="/Home/ShareImage/" method="post">
+									<div class="form-group row">
+										<input type="text" class="form-control" name="AlbumID"
+											id="AlbumID" hidden /> <label class=" col-form-label">Email
+											người nhận</label> <input type="text" class="form-control"
+											name="UserEmail" />
+									</div>
+
+									<button type="submit" style="float: left"
+										class="btn btn-default" id="BtnShare">Thêm</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<script type="text/javascript">
+
+    function OnClickBtnChiaSe(id) {
+            var input_1 = document.getElementById("AlbumID")
+            input_1.setAttribute("value", id);
+        }
+</script>
+
+		</div>
+	</div>
+
+
+
+	<!--   Core JS Files   -->
+	<script src="js/bootstrap.min.js"></script>
 
 	<script src="js/core/jquery.min.js"></script>
 	<script src="js/core/popper.min.js"></script>
@@ -221,7 +259,7 @@
 		type="text/javascript"></script>
 	<!-- Material Dashboard DEMO methods, don't include it in your project! -->
 	<script src="demo/demo.js"></script>
-    <script>
+	<script>
         $(document).ready(function () {
             $().ready(function () {
                 $sidebar = $('.sidebar');
@@ -392,7 +430,7 @@
             });
         });
     </script>
-    <script>
+	<script>
         $(document).ready(function () {
             // Javascript method's body can be found in assets/js/demos.js
             md.initDashboardPageCharts();
@@ -400,13 +438,13 @@
         });
     </script>
 
-<style>
-    .sidebar .nav li:hover, .sidebar .nav li a:visited {
-        background-color: #9124a3
-    }
+	<style>
+.sidebar .nav li:hover, .sidebar .nav li a:visited {
+	background-color: #9124a3
+}
 </style>
 
-<script>
+	<script>
     $('#modalShare').on('show.bs.modal', function(e) {
  
     //get data-id attribute of the clicked element
@@ -421,6 +459,5 @@
     }
 
 </script>
-
 </body>
 </html>

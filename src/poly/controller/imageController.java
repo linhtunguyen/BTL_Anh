@@ -19,7 +19,7 @@ public class imageController {
 	@Autowired
 	SessionFactory factory;
 
-	@RequestMapping("/imageUser")
+	@RequestMapping("/ImageUser")
 	public String index(ModelMap model) {
 		// List<Users> sanPhams = null;
 		Session session = factory.openSession();
@@ -87,12 +87,12 @@ public class imageController {
 
 //			Lấy ả thanhông qua đối tượng User
            
-			user = (Users) session.get(Users.class, 3);
-			System.out.println(user);
+			albums = (Albums) session.get(Albums.class, 3);
+			System.out.println(albums);
 //			Query q = session.createQuery("from Images ");
-			for (int i = 0; i < user.getAlbumses().size(); i++) {
-				Albums albums = (Albums) user.getAlbumses().toArray()[i];
-				System.out.println("Id_anh: " + albums.getAlbumId() + " User_Id: " + albums.getUsers().getUserId());
+			for (int i = 0; i < albums.getImageses().size(); i++) {
+				Images images = (Images) albums.getImageses().toArray()[i];
+				System.out.println("Id_anh: " + images.getImageId()+ " User_Id: " + albums.getUsers().getUserId());
 			}
 		} catch (Exception e) {
 			System.out.println(e);
@@ -102,9 +102,9 @@ public class imageController {
 		}
 
 		/* model.addAttribute("sanPhams", sanPhams); */
-		model.addAttribute("User",user);
-		model.addAttribute("Albums", user.getAlbumses());
-		return "AlbumUser";
+		model.addAttribute("Album",albums);
+		model.addAttribute("Images",albums.getImageses() );
+		return "AlbumImage";
 	}
 	
 }
