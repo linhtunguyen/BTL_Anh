@@ -5,26 +5,27 @@
 <html>
 <head>
 <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
-    <link rel="icon" type="image/png" href="img/favicon.png">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
-    <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
-    <!--     Fonts and icons     -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <!-- CSS Files -->
-    <link href="css/material-dashboard.css?v=2.1.2" rel="stylesheet" />
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="css/demo.css" rel="stylesheet" />
+<link rel="apple-touch-icon" sizes="76x76"
+	href="img/apple-icon.png">
+<link rel="icon" type="image/png"
+	href="img/favicon.png">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<base href="${pageContext.request.contextPath}/">
+<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no'
+	name='viewport' />
+<!--     Fonts and icons     -->
+<link rel="stylesheet" type="text/css"
+	href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+<!-- CSS Files -->
+<link href="css/material-dashboard.css?v=2.1.2"
+	rel="stylesheet" />
+<!-- CSS Just for demo purpose, don't include it in your project -->
+<link href="demo/demo.css" rel="stylesheet" />
 </head>
 <body>
-
-
-
-
-
-    <div class="wrapper ">
+ <div class="wrapper ">
         <div class="sidebar" data-color="purple" data-background-color="white" data-image="~/Content/assets/img/sidebar-1.jpg">
             <div class="logo">
                 <a class="simple-text logo-normal">
@@ -114,64 +115,41 @@
                     </div>
                 </div>
             </div>
-<div class="container-fluid">
-    <form class="navbar-form navbar-right" action="/Home/SearchAlbum" method="post" style="position:relative; top:50px">
-        <div class="form-group bmd-form-group">
-            <input type="text" class="form-control" name="search" placeholder="Tìm kiếm ..." style="position:relative; border-top:1px solid gray; width:301px"><br>
-        </div>
-        <button type="submit" class="btn btn-default" style="position:relative; top:-75px; left:300px;height:35px">
-            <img src="/Content/images/icon-tim-kiem.png" width="18" height="16">
-
-        </button>
-
-    </form>
-
-    <div class="row" style="width:100%">
-       <c:forEach items="${ Albums}" var="item">
-        
-            <div class="col-md-3" style="margin:10px 0;">
-                <img src="../Images/${item.albumId}/${Image.imageUrl}" style="width:100%; height:200px" />
-
-                <p style="text-align:center">
-                    <a class="btn btn-primary" href="/Home/DetailAlbum/@it.AlbumID">
-                    ${ item.albumName}
-                      
-                    </a>
-                </p>
-                <a class="btn center-block" style="margin:auto" href="/Home/DeleteAlbum/?AlbumID=@it.AlbumID">Xóa</a>
-
-                <a class="btn  center-block" style="margin:auto" data-toggle="modal" data-book-id=@it.AlbumID id="BtnChiaSe" onclick="OnClickBtnChiaSe($(this).attr('data-book-id'))"
-                   data-target="#modalShare">Chia Sẻ </a>
-            </div>
-            <div id="modalShare" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    <!-- Modal content-->
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title">Chia sẻ với</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/Home/ShareAlbum/" method="post">
-                                <div class="form-group row">
-                                    <input type="text" class="form-control" name="AlbumID" id="AlbumID"  hidden />
-                                    <label class=" col-form-label">Email người nhận</label>
-                                    <input type="text" class="form-control" name="UserEmail" />
-                                </div>
-
-                                <button type="submit" style="float:left" class="btn btn-default" id="BtnShare" >Thêm</button>
-                            </form>
-                        </div>
-                    </div>
+            
+            <div class="container-fluid">
+    <div class="row" style="height:80px;"></div>
+    <div class="">
+        <c:forEach items="${ AlbumShare}" var="item">
+        <div class="row" style="margin:10px;">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2" style="padding:0">
+                <div style=" border-bottom: 2px solid #3C4858;width:100% ;padding:10px">
+                    <img src="Images/${item.albums.albumId}/${item.images.imageUrl}" style="width:80%;border-radius:10px;height:100px" />
                 </div>
             </div>
-           
-      </c:forEach>
-
+            <div class="col-lg-4" style="border-bottom: 2px solid #3C4858; ">
+                <div style="padding: 40px 2px;font-weight:500">
+                    <a href="image/@it.album.AlbumID">
+                        ${item.albums.albumName }
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-2" style="border-bottom: 2px solid #3C4858; ">
+                <div style="padding: 40px 2px; font-weight:500">
+                    <div>${item.users.userName}</div>
+                </div>
+            </div>
+        </div>
+               
+         </c:forEach>
     </div>
-    
+    <div class="" style="width:100%">
+       
+    </div>
+
 </div>
- </div>
+
+</div>
     </div>
 
 

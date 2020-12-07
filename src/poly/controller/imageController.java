@@ -75,17 +75,26 @@ public class imageController {
 			}
 		Session session = factory.openSession();
 		Users user = null;
+		Images imag= null;
+		Albums album =null;
 		try {
+			
 
 //			Lấy ả thanhông qua đối tượng User
 			user = (Users) session.get(Users.class, taiKhoan.getUserId());
+			album =(Albums) session.get(Albums.class, taiKhoan.getUserId());
 			
-			System.out.println(user);
+			imag= (Images) session.get(Images.class, album.getAlbumId());
+			
+			System.out.println("daylaimage :" +imag);
 //			Query q = session.createQuery("from Images ");
 			for (int i = 0; i < user.getAlbumses().size(); i++) {
 				Albums albums = (Albums) user.getAlbumses().toArray()[i];
-				System.out.println("Id_anh: " + albums.getAlbumId() + " User_Id: " + albums.getUsers().getUserId());
+				
+				//System.out.println("Id_anh: " + albums.getAlbumId() + " User_Id: " + albums.getUsers().getUserId());
+				
 			}
+			System.out.println("Id_anh: " +imag );
 		} catch (Exception e) {
 			System.out.println(e);
 
@@ -96,6 +105,7 @@ public class imageController {
 		/* model.addAttribute("sanPhams", sanPhams); */
 		model.addAttribute("User",user);
 		model.addAttribute("Albums", user.getAlbumses());
+		model.addAttribute("Image", imag);
 		return "AlbumUser";
 	}
 	
@@ -113,7 +123,7 @@ public class imageController {
 		Albums albums = null;
 		try {
 
-//			Lấy ả thanhông qua đối tượng User
+//			Lấy ảnh thanhông qua đối tượng User
            
 			albums = (Albums) session.get(Albums.class, taiKhoan.getUserId());
 			System.out.println(albums);
@@ -141,31 +151,7 @@ public class imageController {
 		Images image = null;
 		Shared share=null;
 		Users user=null;
-//		try {
-//			
-//
-////			Lấy ả thanhông qua đối tượng User
-//           
-//			image = (Images) session.get(Images.class,ImageID );
-//			user =(Users) session.get(Users.class,UserID );
-//			share= new Shared();
-//			share.setImages(image);
-//			share.setUsers(user);
-//		
-//			share
-//		} catch (Exception e) {
-//			System.out.println(e);
-//
-//		} finally {
-//			session.close();
-//		}
-//
-//		/* model.addAttribute("sanPhams", sanPhams); */
-//		model.addAttribute("Album",albums);
-//		model.addAttribute("Images",albums.getImageses() );
-//		return "AlbumImage";
-//		
-		
+
 		
 		Transaction tran = session.beginTransaction();
 		try {
@@ -197,23 +183,38 @@ public class imageController {
 	
 	
 	@RequestMapping("/AlbumShare")
-	public String index5(ModelMap model, @RequestParam("AlbumID") int AlbumID) {
-		// List<Users> sanPhams = null;
+	public String index5(ModelMap model,HttpSession sess) {
+		  Users taiKhoan = (Users)sess.getAttribute("TaiKhoan");
+		  Users user= null;
+		  Albums album=null;
+		  Users userShare=null;
+			if(taiKhoan == null )
+			{
+				
+				return "redirect:User/login";
+			}
 		Session session = factory.openSession();
-		Users user = null;
-		Albums album =null;
+		Albums albums = null;
+		
 		try {
 
 //			Lấy ả thanhông qua đối tượng User
-
-			user = (Users) session.get(Users.class, 3);
-			System.out.println(user);
-
-			album = (Albums) session.get(Albums.class,AlbumID);
-			for (int i = 0; i < user.getAlbumses().size(); i++) {
-				Albums albums = (Albums) user.getAlbumses().toArray()[i];
-				System.out.println("Id_anh: " + albums.getAlbumId() + " User_Id: " + albums.getUsers().getUserId());
-			}
+			List<Users> listTK = null;
+			user = (Users) session.get(Users.class,taiKhoan.getUserId());
+			System.out.println("shredai" + user.getShareds());
+//			Query query = session.createQuery("from Shared where userID = :userID");
+//			query.setParameter("userID", user.getUserId());
+//			listTK = query.list();
+//			userShare =(Users) session.get(Users.class,listTK.getUserId());
+//			
+//
+//			
+//			userShare= user.getShareds();
+//			System.out.println("shredai" +userShare);
+//			for (int i = 0; i < user.getAlbumses().size(); i++) {
+//				 albums = (Albums) user.getAlbumses().toArray()[i];
+//				
+//			}
 		} catch (Exception e) {
 			System.out.println(e);
 
@@ -223,7 +224,7 @@ public class imageController {
 
 		/* model.addAttribute("sanPhams", sanPhams); */
 		model.addAttribute("User",user);
-		model.addAttribute("Albums", user.getAlbumses());
+		model.addAttribute("AlbumShare", user.getShareds());
 		return "AlbumShare";
 	}
 	
