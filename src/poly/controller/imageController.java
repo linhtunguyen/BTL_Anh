@@ -2,13 +2,18 @@ package poly.controller;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import model.*;
 
@@ -18,6 +23,7 @@ public class imageController {
 
 	@Autowired
 	SessionFactory factory;
+	
 
 	@RequestMapping("/ImageUser")
 	public String index(ModelMap model) {
@@ -106,5 +112,96 @@ public class imageController {
 		model.addAttribute("Images",albums.getImageses() );
 		return "AlbumImage";
 	}
+	
+	@RequestMapping(value="/addImage", method= RequestMethod.POST)
+	public String index3( @RequestParam("ImageID") int ImageID, @RequestParam("UserID") int UserID) {
+		Session session = factory.openSession();
+		Images image = null;
+		Shared share=null;
+		Users user=null;
+//		try {
+//			
+//
+////			Lấy ả thanhông qua đối tượng User
+//           
+//			image = (Images) session.get(Images.class,ImageID );
+//			user =(Users) session.get(Users.class,UserID );
+//			share= new Shared();
+//			share.setImages(image);
+//			share.setUsers(user);
+//		
+//			share
+//		} catch (Exception e) {
+//			System.out.println(e);
+//
+//		} finally {
+//			session.close();
+//		}
+//
+//		/* model.addAttribute("sanPhams", sanPhams); */
+//		model.addAttribute("Album",albums);
+//		model.addAttribute("Images",albums.getImageses() );
+//		return "AlbumImage";
+//		
+		
+		
+		Transaction tran = session.beginTransaction();
+		try {
+			
+			image = (Images) session.get(Images.class,ImageID );
+			user =(Users) session.get(Users.class,UserID );
+			share= new Shared();
+			share.setImages(image);
+			share.setUsers(user);
+			
+			
+			session.save(share);
+			
+			tran.commit();
+			
+			return "redirect:/image/ImageUser.html";
+		} catch (Exception e) {
+			
+		} finally {
+			session.close();
+			
+		}
+		
+		return "redirect:/ImageUser.html";
+}
+	
+	
+	@RequestMapping("/AlbumShare")
+	public String index5(ModelMap model, @RequestParam("AlbumID") int AlbumID) {
+		// List<Users> sanPhams = null;
+		Session session = factory.openSession();
+		Users user = null;
+		Albums album =null;
+		try {
+
+//			Lấy ả thanhông qua đối tượng User
+
+			user = (Users) session.get(Users.class, 3);
+			System.out.println(user);
+
+			album = (Albums) session.get(Albums.class,AlbumID);
+			for (int i = 0; i < user.getAlbumses().size(); i++) {
+				Albums albums = (Albums) user.getAlbumses().toArray()[i];
+				System.out.println("Id_anh: " + albums.getAlbumId() + " User_Id: " + albums.getUsers().getUserId());
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+
+		} finally {
+			session.close();
+		}
+
+		/* model.addAttribute("sanPhams", sanPhams); */
+		model.addAttribute("User",user);
+		model.addAttribute("Albums", user.getAlbumses());
+		return "AlbumShare";
+	}
+	
+	
 	
 }
