@@ -8,10 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Ten User: ${User.userName }</h1>
+<h1>Ten User: </h1>
 
-<c:forEach items="${ Images}" var="item">
-	<p>${ item.imageId}</p>
-</c:forEach>
+
 </body>
 </html>
