@@ -132,7 +132,7 @@
                  data-target="#detailImg" data-whatever="@it.ImageUrl"  data-book-id=@it.ImageUrl id="" onclick="OnClickBtnDetail($(this).attr('data-book-id'))" />
             <div style="text-align:center; font-weight:500"> ${ item.imagedate}</div>
             <a class="btn btn-primary center-block" href="/Home/Delete/?ImageID=@it.ImageID">Xóa</a>
-            <a class="btn  center-block" style="margin:auto" data-toggle="modal" data-book-id=@it.ImageID id="BtnChiaSe" onclick="OnClickBtnChiaSe($(this).attr('data-book-id'))"
+            <a class="btn  center-block" style="margin:auto" data-toggle="modal" data-book-id=${ item.imageId } id="BtnChiaSe" onclick="OnClickBtnChiaSe($(this).attr('data-book-id'))"
                data-target="#modalShare">Chia Sẻ</a>
         </div>
             <div id="detailImg" class="modal fade bd-example-modal-lg" role="dialog">
@@ -161,11 +161,11 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form action="/Home/ShareImage/" method="post">
+                    <form action="image/addImage.html" method="post">
                         <div class="form-group row">
-                            <input type="text" class="form-control" name="AlbumID" id="AlbumID" hidden />
+                            <input type="text" class="form-control" name="ImageID" id="AlbumID" hidden value=""/>
                             <label class=" col-form-label">Email người nhận</label>
-                            <input type="text" class="form-control" name="UserEmail" />
+                            <input type="text" class="form-control" name="UserID" value="${User.userId}" />
                         </div>
 
                         <button type="submit" style="float:left" class="btn btn-default" id="BtnShare">Thêm</button>
