@@ -49,7 +49,7 @@
 							<i class="material-icons">image</i>
 							<p>Ảnh</p>
 					</a></li>
-					<li class="nav-item "><a class="nav-link" href="image/ImageUser.html">
+					<li class="nav-item "><a class="nav-link" href="image/AlbumUser.html">
 							<i class="material-icons">folder</i>
 							<p>Album</p>
 					</a></li>

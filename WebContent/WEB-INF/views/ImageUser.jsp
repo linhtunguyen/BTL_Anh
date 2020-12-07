@@ -34,15 +34,15 @@
 			</div>
 			<div class="sidebar-wrapper">
 				<ul class="nav">
-					<li class="nav-item "><a class="nav-link" href="/Home/Index">
+					<li class="nav-item "><a class="nav-link" href="image/ImageUser.html">
 							<i class="material-icons">image</i>
 							<p>Ảnh</p>
 					</a></li>
-					<li class="nav-item "><a class="nav-link" href="/Album">
+					<li class="nav-item "><a class="nav-link" href="image/AlbumUser.html">
 							<i class="material-icons">folder</i>
 							<p>Album</p>
 					</a></li>
-					<li class="nav-item "><a class="nav-link" href="/Home/Share">
+					<li class="nav-item "><a class="nav-link" href="image/AlbumShare.html">
 							<i class="material-icons">share</i>
 							<p>Được chia sẻ</p>
 					</a></li>
