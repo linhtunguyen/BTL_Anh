@@ -22,10 +22,10 @@
 <link href="css/material-dashboard.css?v=2.1.2"
 	rel="stylesheet" />
 <!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="demo/demo.css" rel="stylesheet" />
+<link href="css/demo.css" rel="stylesheet" />
 </head>
 <body>
-
+<div>
 	<div class="wrapper ">
 		<div class="sidebar" data-color="purple" data-background-color="white"
 			data-image="img/sidebar-1.jpg">
@@ -56,7 +56,8 @@
 				<div class="container-fluid">
 					<div class="collapse navbar-collapse justify-content-end">
 						<ul class="navbar-nav">
-							<li class="nav-item"><a class="nav-link" href="javascript:;"
+							<li class="nav-item"><a class="nav-link" data-toggle="modal"
+								data-target="#modalTailen" 
 								style="display: flex"> <i class="material-icons">backup</i>
 									<p style="display: block">Tải lên</p>
 							</a></li>
@@ -107,11 +108,31 @@
 					</div>
 				</div>
 			</div>
-			
-			
+			<div id="modalTailen" class="modal fade" role="dialog">
+			 <div class="row">
+			 <div class="modal-dialog">
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">Thêm ảnh</h4>
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+				            <form action="/BTL_Anh/image/uploadImage.html" method="post" enctype="multipart/form-data">
+				                <span>Chọn file</span>
+				                <input type="file" name="ImageFiles" multiple />
+				                <hr />
+				                <input type="submit" value="Thêm mới" />
+				                <br />
+				            </form>
+				           </div>
+				           </div>
+				</div>
+        </div>
+			</div>
 			<div class="container-fluid">
 
-    <form class="navbar-form navbar-right" action="/Home/SearchImage" method="post" style="position:relative;right:-700px; top:-30px">
+    <form class="navbar-form navbar-right" action="/Home/SearchImage" method="post">
         <div class="form-group bmd-form-group">
 
             <span style="display:inline">
@@ -120,10 +141,12 @@
             <span>To          :</span><input type="date" name="denngay" class="form-control" value="01/01/10000" style="position:relative;display:inline;  gray; width:120px">
 
             <button type="submit" class="btn btn-default" style="position:relative; left:0px;height:35px; ">
-                <img src="/Content/images/icon-tim-kiem.png" width="18" height="16">
+                <img src="Images/icon-tim-kiem.png" width="18" height="16">
             </button>
         </div>
     </form>
+    
+           
     <div class="row" style="width:100%">
      <c:forEach items="${ Images}" var="item">
        
