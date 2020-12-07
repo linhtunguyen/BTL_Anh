@@ -22,7 +22,7 @@
 <link href="css/material-dashboard.css?v=2.1.2"
 	rel="stylesheet" />
 <!-- CSS Just for demo purpose, don't include it in your project -->
-<link href="demo/demo.css" rel="stylesheet" />
+<link href="css/demo.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -66,7 +66,7 @@
 									<p style="display: block">Tạo Album mới</p>
 							</a></li>
 							<li class="nav-item dropdown"><a class="nav-link"
-								href="/User/Logout" style="display: flex" aria-haspopup="true"
+								href="/BTL_Anh/User/logout.html" style="display: flex" aria-haspopup="true"
 								aria-expanded="false"> <i class="material-icons">person</i>
 									<p style="display: block">Đăng xuất</p>
 							</a>
@@ -165,7 +165,7 @@
                         <div class="form-group row">
                             <input type="text" class="form-control" name="ImageID" id="AlbumID" hidden value=""/>
                             <label class=" col-form-label">Email người nhận</label>
-                            <input type="text" class="form-control" name="UserID" value="${User.userId}" />
+                            <input type="text" class="form-control" name="UserID" value="" />
                         </div>
 
                         <button type="submit" style="float:left" class="btn btn-default" id="BtnShare">Thêm</button>

@@ -3,6 +3,7 @@ package poly.controller;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.servlet.http.HttpSession;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -26,16 +27,23 @@ public class imageController {
 	
 
 	@RequestMapping("/ImageUser")
-	public String index(ModelMap model) {
-		// List<Users> sanPhams = null;
+	public String index(ModelMap model,HttpSession sess) {
+	
+           Users taiKhoan = (Users)sess.getAttribute("TaiKhoan");
+		
+		if(taiKhoan == null )
+		{
+			
+			return "redirect:User/login";
+		}
 		Session session = factory.openSession();
 		Users user = null;
 		try {
 
 //			Lấy ả thanhông qua đối tượng User
 
-			user = (Users) session.get(Users.class, 3);
-			System.out.println(user);
+			user = (Users) session.get(Users.class, taiKhoan.getUserId());
+			System.out.println(taiKhoan.getUserId());
 //			Query q = session.createQuery("from Images ");
 			for (int i = 0; i < user.getImageses().size(); i++) {
 				Images images = (Images) user.getImageses().toArray()[i];
@@ -56,15 +64,22 @@ public class imageController {
 	
 	
 	@RequestMapping("/AlbumUser")
-	public String index1(ModelMap model) {
+	public String index1(ModelMap model,HttpSession sess) {
 		// List<Users> sanPhams = null;
+	    Users taiKhoan = (Users)sess.getAttribute("TaiKhoan");
+		
+			if(taiKhoan == null )
+			{
+				
+				return "redirect:User/login";
+			}
 		Session session = factory.openSession();
 		Users user = null;
 		try {
 
 //			Lấy ả thanhông qua đối tượng User
-
-			user = (Users) session.get(Users.class, 3);
+			user = (Users) session.get(Users.class, taiKhoan.getUserId());
+			
 			System.out.println(user);
 //			Query q = session.createQuery("from Images ");
 			for (int i = 0; i < user.getAlbumses().size(); i++) {
@@ -85,15 +100,22 @@ public class imageController {
 	}
 	
 	@RequestMapping("/AlbumImage")
-	public String index2(ModelMap model) {
+	public String index2(ModelMap model,HttpSession sess) {
 		// List<Users> sanPhams = null;
+		  Users taiKhoan = (Users)sess.getAttribute("TaiKhoan");
+			
+			if(taiKhoan == null )
+			{
+				
+				return "redirect:User/login";
+			}
 		Session session = factory.openSession();
 		Albums albums = null;
 		try {
 
 //			Lấy ả thanhông qua đối tượng User
            
-			albums = (Albums) session.get(Albums.class, 3);
+			albums = (Albums) session.get(Albums.class, taiKhoan.getUserId());
 			System.out.println(albums);
 //			Query q = session.createQuery("from Images ");
 			for (int i = 0; i < albums.getImageses().size(); i++) {
@@ -114,7 +136,7 @@ public class imageController {
 	}
 	
 	@RequestMapping(value="/addImage", method= RequestMethod.POST)
-	public String index3( @RequestParam("ImageID") int ImageID, @RequestParam("UserID") int UserID) {
+	public String index3( @RequestParam("ImageID") int ImageID, @RequestParam("UserID") String userEmail) {
 		Session session = factory.openSession();
 		Images image = null;
 		Shared share=null;
@@ -147,9 +169,12 @@ public class imageController {
 		
 		Transaction tran = session.beginTransaction();
 		try {
-			
+			 List<Users> listTK = null;
+			Query query = session.createQuery("from Users where userEmail = :userEmail");
+			query.setParameter("userEmail", userEmail);
+			listTK = query.list();
 			image = (Images) session.get(Images.class,ImageID );
-			user =(Users) session.get(Users.class,UserID );
+			user =(Users) session.get(Users.class,listTK.get(0).getUserId() );
 			share= new Shared();
 			share.setImages(image);
 			share.setUsers(user);
